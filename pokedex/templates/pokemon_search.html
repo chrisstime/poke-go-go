@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="get">
+        {{ form|crispy }}
+        <input type="text" name="pokemon_name">
+        <button type="submit" class="btn btn-success">Search Pokedex</button>
+    </form>
+
+    {% if search_result %}
+        {% if search_result.success %}
+            <p> Pokemon #{{search_result.id}}: {{search_result.name}} </p>
+            <p> Weight: {{search_result.weight}} kgs </p>
+            <p><img src='{{search_result.sprites.front_default}}' height="250" width="250"></p>
+        {% else %}
+            <p> Pokemon not found. Please try again. </p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
